@@ -33,7 +33,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
@@ -54,13 +53,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		
 		switch (v.getId()) {
 		case R.id.about_button:
 			Intent i = new Intent(this, About.class);
 			startActivity(i);
 			break;
 		}
-		
 	}
 }
