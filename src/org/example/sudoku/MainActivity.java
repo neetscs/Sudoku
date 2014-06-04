@@ -69,6 +69,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		case R.id.new_button:
 			openNewGameDialog();
 			break;
+		case R.id.exit_button:
+			finish();
+			break;
 		}
 	}
 	private static final String TAG = "Sudoku";
