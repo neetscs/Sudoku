@@ -1,11 +1,16 @@
 package org.example.sudoku;
 
+import android.R.string;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,7 +39,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main, menu);
 		return true;
 	}
 
@@ -43,11 +50,12 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		switch (item.getItemId()) {
+		case R.id.settings:
+			startActivity(new Intent(this, Prefs.class));
 			return true;
 		}
-		return super.onOptionsItemSelected(item);
+		return false;
 	}
 
 
@@ -58,6 +66,29 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 			Intent i = new Intent(this, About.class);
 			startActivity(i);
 			break;
+		case R.id.new_button:
+			openNewGameDialog();
+			break;
 		}
 	}
+	private static final String TAG = "Sudoku";
+	
+	private void openNewGameDialog() {
+		new AlertDialog.Builder(this)
+			.setTitle(R.string.new_game_title)
+			.setItems(R.array.difficulty,
+			new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialoginterface, int i) {
+					startGame(i);			
+				}
+			})
+			.show();
+		
+	}
+	
+	private void startGame(int i) {
+		Log.d(TAG, "clicked on " + i);
+		//Start game here
+	}
+	
 }
