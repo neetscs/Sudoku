@@ -861,10 +861,19 @@ containing a value of this type.
         public static final int abc_split_action_bar_is_narrow=0x7f070002;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f080003;
+        public static final int abc_search_url_text_holo=0x7f08000c;
         public static final int abc_search_url_text_normal=0x7f080000;
         public static final int abc_search_url_text_pressed=0x7f080002;
         public static final int abc_search_url_text_selected=0x7f080001;
+        public static final int puzzle_background=0x7f080003;
+        public static final int puzzle_dark=0x7f080006;
+        public static final int puzzle_foreground=0x7f080007;
+        public static final int puzzle_hilite=0x7f080004;
+        public static final int puzzle_hint_0=0x7f080008;
+        public static final int puzzle_hint_1=0x7f080009;
+        public static final int puzzle_hint_2=0x7f08000a;
+        public static final int puzzle_light=0x7f080005;
+        public static final int puzzle_selected=0x7f08000b;
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -1260,16 +1269,19 @@ containing a value of this type.
         public static final int continue_label=0x7f0b0011;
         public static final int easy_label=0x7f0b001f;
         public static final int exit_label=0x7f0b0014;
+        public static final int game_title=0x7f0b0022;
         public static final int hard_label=0x7f0b0021;
         public static final int hello_world=0x7f0b000d;
         public static final int hints_summary=0x7f0b001d;
         public static final int hints_title=0x7f0b001c;
+        public static final int keypad_title=0x7f0b0024;
         public static final int main_title=0x7f0b0010;
         public static final int medium_label=0x7f0b0020;
         public static final int music_summary=0x7f0b001b;
         public static final int music_title=0x7f0b001a;
         public static final int new_game_label=0x7f0b0012;
         public static final int new_game_title=0x7f0b001e;
+        public static final int no_moves_label=0x7f0b0023;
         public static final int settings_label=0x7f0b0017;
         public static final int settings_shortcut=0x7f0b0019;
         public static final int settings_title=0x7f0b0018;
