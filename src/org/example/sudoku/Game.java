@@ -22,8 +22,8 @@ public class Game extends Activity {
 		Log.d(TAG, "onCreate");
 		
 		int diff = getIntent().getIntExtra(KEY_DIFFICULTY, DIFFICULTY_EASY);
-		puzzle = getPuzzle(diff);
-		calculateUsedTiles();
+		//puzzle = getPuzzle(diff);
+		//calculateUsedTiles();
 		puzzleView = new PuzzleView(this);
 		setContentView(puzzleView);
 		puzzleView.requestFocus();

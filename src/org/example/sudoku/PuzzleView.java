@@ -5,11 +5,17 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.Log;
+import android.graphics.Paint.FontMetrics;
+import android.graphics.Paint.Style;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.animation.AnimationUtils;
 
 public class PuzzleView extends View {
 	private static final String TAG = "Sudoku";
 	private final Game game;
-	public puzzleView(Context context) {
+	public PuzzleView(Context context) {
 		super(context);
 		this.game = (Game) context;
 		setFocusable(true);
@@ -40,11 +46,33 @@ public class PuzzleView extends View {
 		//Draw the background
 		Paint background = new Paint();
 		background.setColor(getResources().getColor(R.color.puzzle_background));
-		canvas.drawRect(0, 0, getWidth(), getHeight());
+		canvas.drawRect(0, 0, getWidth(), getHeight(), background);
 		
 		//Draw the board
 		Paint dark = new Paint();
-		dark.setColor(getResources(), getColor(R.color.puzzle_dark));
+		dark.setColor(getResources().getColor(R.color.puzzle_dark));
+		Paint hilite = new Paint();
+		hilite.setColor(getResources().getColor(R.color.puzzle_hilite));
+		Paint light = new Paint();
+		light.setColor(getResources().getColor(R.color.puzzle_light));
+		
+		//Draw minor grid lines
+		for (int i = 0; i < 9; i++){
+			canvas.drawLine(0, i * height, getWidth(), i * height, light);
+			canvas.drawLine(0, i * height + 1, getWidth(), i * height + 1, hilite);
+			canvas.drawLine(i * width, 0, i * width, getHeight(), light);
+			canvas.drawLine(i * width + 1, 0, i * width + 1, getHeight(), hilite);
+			
+		}
+		//Draw major grid lines
+		for ( int i = 0; i < 9 ; i++){
+			if ( i % 3 != 0)
+				continue;
+			canvas.drawLine(0, i * height, getWidth(), i * height, dark);
+			canvas.drawLine(0, i * height + 1, getWidth(), i * height + 1, hilite);
+			canvas.drawLine(i * width, 0, i * width, getHeight(), dark);
+			canvas.drawLine(i * width + 1, 0, i * width + 1, getHeight(), hilite);			
+		}
 		
 	}
 }
