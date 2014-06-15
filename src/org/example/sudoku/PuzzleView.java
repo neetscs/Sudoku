@@ -32,13 +32,13 @@ public class PuzzleView extends View {
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		width = w / 9f;
 		height = h / 9f;
-		getRect(selX, selY, selRect);
+		updateRect(selX, selY, selRect);
 		Log.d(TAG, "onSizeChanged: width " + width + ",height " + height);
 		super.onSizeChanged(w, h, oldw, oldh);
 	}
 	
-	private void getRect(int x, int y, Rect rect) {
-		rect.set((int) (x*width), (int) (y*height), (int) (x*width + width), (int) (y*height +height));
+	private void updateRect(int col, int row, Rect rect) {
+		rect.set((int) (col*width), (int) (row*height), (int) (col*width + width), (int) (row*height +height));
 	}
 	
 	@Override
@@ -73,6 +73,7 @@ public class PuzzleView extends View {
 			canvas.drawLine(i * width, 0, i * width, getHeight(), dark);
 			canvas.drawLine(i * width + 1, 0, i * width + 1, getHeight(), hilite);			
 		}
+		
 		//Draw the numbers
 		//Define colors and styles for the numbers
 		Paint foreground = new Paint (Paint.ANTI_ALIAS_FLAG);
@@ -84,15 +85,18 @@ public class PuzzleView extends View {
 		
 		//Draw the number in the center of the tile
 		FontMetrics fm = foreground.getFontMetrics();
+		
 		//Centering in X; use alignment (and X at midpoint)
 		float x = width / 2;
+	
 		//Centering in Y: measure ascent/descent first
-		float y = (height - (fm.ascent + fm.descent)) / 2 ;
+		float y = height / 2 - (fm.ascent + fm.descent) / 2 ;
 		for (int i = 0; i < 9; i++){
 			for (int j = 0; j < 9; j++){
 				canvas.drawText(this.game.getTileString(i, j), i * width + x, j * height + y, foreground);
 			}
 		}
+		
 		//Draw the selection
 		Log.d(TAG, "selRect=" + selRect);
 		Paint selected = new Paint();
@@ -111,7 +115,7 @@ public class PuzzleView extends View {
 			for (int j = 0; j < 9; j++){
 				int movesleft = 9 - game.getUsedTiles(i,j).length;
 				if (movesleft < c.length) {
-					getRect(i, j, r);
+					updateRect(i, j, r);
 					hint.setColor(c[movesleft]);
 					canvas.drawRect(r, hint);
 				}
@@ -179,9 +183,19 @@ public class PuzzleView extends View {
 	
 	private void select(int x, int y) {
 		invalidate(selRect);
-		selX = Math.min(Math.max(x, 0), 8);
-		selY = Math.min(Math.max(y, 0), 8);
-		getRect(selX, selY, selRect);
+		if (x == -1)
+			selX = 8;
+		else if (x == 9)
+			selX = 0;
+		else 
+			selX = x;
+		if (y == -1)
+			selY = 8;
+		else if (y == 9)
+			selY = 0;
+		else 
+			selY = y;
+		updateRect(selX, selY, selRect);
 		invalidate(selRect);
 	}
 	
