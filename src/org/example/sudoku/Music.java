@@ -21,7 +21,8 @@ public class Music {
 	public static void stop(Context context) {
 		if (mp != null) {
 			mp.stop();
-			mp.release();mp = null;
+			mp.release();
+			mp = null;
 		}
 	}
 }
